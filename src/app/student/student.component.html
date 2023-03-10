@@ -1,0 +1,107 @@
+<div class="disp">
+    <form #editForm="ngForm">
+        <div class="card border rounded border--light text-black m">
+            <div class="card-header " style="opacity: 0.7;">
+                <strong><i class="fa fa-list"></i> {{title}}</strong>
+            </div>
+            <div class="card-body">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-sm label">
+                            Student Name:
+                        </div>
+                        <div class="col-sm">
+                            <div *ngIf="editFlag">
+                                <input type="text" [(ngModel)]="student.name" name="name">
+                            </div>
+                            <div *ngIf="!editFlag">
+                                {{student.name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm label">
+                            Student Username:
+                        </div>
+                        <div class="col-sm">
+                            <div>
+                                {{student.userName}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm label">
+                            Student date of birth:
+                        </div>
+                        <div class="col-sm">
+                            <div *ngIf="editFlag">
+                                <input type="date" [(ngModel)]="student.dob" [value]="student.dob | date" name="dob">
+
+                            </div>
+                            <div *ngIf="!editFlag">
+                                {{student.dob | date}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm label">
+                            Student situation:
+                        </div>
+                        <div class="col-sm">
+                            <div *ngIf="editFlag">
+                                <input type="text" [(ngModel)]="student.situation" name="situation">
+                            </div>
+                            <div *ngIf="!editFlag">
+                                {{student.situation}}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-left: 46%; padding-bottom: 20px;">
+                        <div *ngIf="!editFlag">
+                            <button class="btn btn-info btn-sm" (click)="onEdit()" style="align-self: center;"><i
+                                    class="fa fa-pencil-square-o"></i> Edit profile</button>&nbsp;
+                        </div>
+                        <div *ngIf="editFlag">
+                            <a class="btn btn-info btn-sm" (click)="onSave()" style="align-self: center;"><i
+                                    class="fa fa-save"></i> Save</a>&nbsp;
+                            <a class="btn btn-secondary btn-sm" (click)="onCancel()" style="align-self: center;"><i
+                                    class="fa fa-remove"></i> Cancel</a>&nbsp;
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!isAdmin">
+                        <table
+                            class="table table-bordered rounded table-condensed table-hover table-striped table-info">
+                            <thead>
+                                <tr>
+                                    <th>Course Name</th>
+                                    <th>Course acronym</th>
+                                    <th> Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let course of courses">
+                                    <tr *ngIf="courses && courses.length!=0">
+                                        <td>
+                                            {{course.course_name}}
+                                        </td>
+                                        <td>
+                                            {{course.course_acronym}}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger btn-sm" (click)="unenroll(course)"><i class="fa fa-trash-o"></i> Unenroll</button>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="courses.length==0">
+                                        Not enrolled in any course yet
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>

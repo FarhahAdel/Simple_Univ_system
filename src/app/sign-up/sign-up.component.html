@@ -1,0 +1,97 @@
+<form class="form-horizontal" #signup="ngForm">
+	<div class="login-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8 m-auto col-sm-8 col-12">
+					<div class="log-box">
+						<div class="row">
+							<div class="col-xl-5 col-sm-5 col-12 pad-right-0">
+								<div class="logo-back">
+								</div>
+							</div>
+							<div class="col-xl-7 col-sm-7 col-12 pad-left-0">
+								<div class="log-content">
+									<h1>Signup </h1>
+									<div class="log-body">
+										<div class="form-group myr-top">
+											<label>Username</label>
+											<input type="text" id="username" class="form-control custom"
+												placeholder="Username" [(ngModel)]="student.userName" name="username"
+												required minlength="6" #username="ngModel">
+											<p class="text-danger"
+												*ngIf="username.errors?.required && username.touched">
+												Username is required.
+											</p>
+											<p class="text-danger" *ngIf="username.errors?.minlength">
+												username must be at least 6 characters long.
+											</p>
+											
+										</div>
+										<div class="form-group myr-top">
+											<label>Password</label>
+											<input [type]="fieldTextType ? 'text' : 'password'" id="password" class="form-control custom" 												placeholder="Password" [(ngModel)]="student.password" name="password"
+												required minlength="6" #password="ngModel">
+											
+											<p class="text-danger"
+												*ngIf="password.errors?.required && password.touched">
+												Password is required.
+											</p>
+											<p class="text-danger" *ngIf="password.errors?.minlength">
+												Password must be at least 6 characters long.
+											</p>
+										</div>
+
+										<div class="form-group myr-top">
+											<label>Full name</label>
+											<input type="text" id="name" class="form-control custom" placeholder="Name"
+												[(ngModel)]="student.name" name="name" required minlength="6"
+												#name="ngModel">
+											<p class="text-danger" *ngIf="name.errors?.required && name.touched">
+												Name is required.
+											</p>
+											<p class="text-danger" *ngIf="name.errors?.minlength">
+												Name must be at least 6 characters long.
+											</p>
+										</div>
+
+										<div class="form-group myr-top">
+											<label>Date of birth</label>
+											<input type="date" id="dob" value="2022-09-26" class="form-control custom" placeholder="dob"
+												[(ngModel)]="student.dob" name="dob" #dob="ngModel">
+											<p class="text-danger" *ngIf="dob.errors?.required && dob.touched">
+												Birthday date is required.
+											</p>
+										</div>
+
+										<div class="form-group myr-top">
+											<label>Situation</label>
+											<input type="text" id="situation" class="form-control custom"
+												placeholder="Situation" [(ngModel)]="student.situation" name="situation"
+												 #situation="ngModel">
+											<p class="text-danger" *ngIf="situation.errors?.required && situation.touched">
+												situation is required.
+											</p>
+										</div>
+
+										<div class="log-btn text-center mt-5">
+											<button type="button" class="btn btn-theme1" [disabled]="!signup.form.valid" style="margin-right: 10px;"
+												(click)="save()">Sign Up</button>
+											<button type="reset" class="btn btn-theme1 btn-info "
+												style="background-color: green;">Reset</button>
+										</div>
+										<div class="log-bottom-cotent">
+											<p class="mr-5">already have account? <a class="pr-4" href="login">Login
+												</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<router-outlet></router-outlet>

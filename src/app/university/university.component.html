@@ -1,0 +1,106 @@
+<form #edit="ngForm">
+  <div class="disp">
+    <div class="card border rounded border--light text-black m">
+      <div class="card-header" style="opacity: 0.7;">
+        <strong><i class="fa fa-list"></i> {{title}}</strong>
+      </div>
+      <div class="card-body table-responsive">
+        <div style="padding-left: 40%; padding-bottom: 20px;" class="dropdown" *ngIf="isAdmin && !newButton">
+          <a class="btn btn-secondary btn-sm btn-outline-light"  type="button" (click)="addNew()" style="align-self: center;"><i
+              class="fa fa-pencil-square-o"></i> Add new university</a>&nbsp;
+    
+        </div>
+        <div id="table" style="padding-left: 10px;">
+          <table class="table table-bordered rounded table-condensed table-hover table-striped table-dark">
+            <thead>
+              <tr>
+                <th>University Name</th>
+                <th>University Address</th>
+                <th>University City</th>
+                <th>University district</th>
+                <th>University state</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let univ of university">
+                <tr>
+                  <td>
+                    <div *ngIf="univ.edit">
+                      <input class="input" type="text" name="name" [(ngModel)]="univ.name">
+                    </div>
+                    <div *ngIf="!univ.edit">
+                      {{univ.name}}
+                    </div>
+                  </td>
+                  <td>
+                    <div *ngIf="univ.edit">
+                      <input class="input" type="text" name="address" [(ngModel)]="univ.location.address">
+                    </div>
+                    <div *ngIf="!univ.edit">
+                      {{univ.location.address}}
+                    </div>
+                  </td>
+                  <td>
+                    <div *ngIf="univ.edit">
+                      <input class="input" type="text" name="city" [(ngModel)]="univ.location.city">
+                    </div>
+                    <div *ngIf="!univ.edit">
+                      {{univ.location.city}}
+                    </div>
+                  </td>
+                  <td>
+                    <div *ngIf="univ.edit">
+                      <input class="input" type="text" name="district" [(ngModel)]="univ.location.district">
+                    </div>
+                    <div *ngIf="!univ.edit">
+
+                      {{univ.location.district}}
+                    </div>
+                  </td>
+                  <td>
+                    <div *ngIf="univ.edit">
+                      <input class="input" type="text" name="state" [(ngModel)]="univ.location.state">
+                    </div>
+                    <div *ngIf="!univ.edit">
+                      {{univ.location.state}}
+                    </div>
+                  </td>
+                  <td>
+                    <a class="btn btn-info btn-sm" href="/university/courses" *ngIf="!univ.edit"(click)="view(univ)"><i
+                        class="fa fa-list-ul"></i> View courses</a>&nbsp;
+                    <button class="btn btn-danger btn-sm" (click)="delete(univ)" *ngIf="isAdmin && !univ.edit"><i class="fa fa-trash-o"
+                        > </i> Delete</button>
+                    <button class="btn btn-warning btn-sm"
+                      style="margin-left: 10px; align-content: center;"
+                      *ngIf="!univ.edit && isAdmin" (click)="editUniv(univ)"><i class="fa fa-pencil-square-o"
+                        style="margin-left: 15px; align-content: center;"> </i>Edit</button>
+                    <button class="btn btn-success btn-sm" style="margin-left: 5px; margin-top: 3px;" *ngIf="univ.edit"
+                      (click)="saveUniv(univ)"><i class="fa fa-save" *ngIf="isAdmin"> </i> Save</button>
+                      <button class="btn btn-secondary btn-sm" style="margin-left: 5px; margin-top: 3px;" *ngIf="univ.edit"
+                      (click)="onCancel(univ)"><i class="fa fa-close" *ngIf="isAdmin"> </i> Cancel</button>
+                  </td>
+                </tr>
+              </ng-container>
+              <tr style="text-align:center;" *ngIf="university && university.length == 0">
+                <td colspan="6">{{noUnivs}}</td>
+              </tr>
+              <tr *ngIf="newButton">
+                <td> <input class="input" *ngIf="newButton" type="text" name="name" [(ngModel)]="newUniv.name"></td>
+                <td> <input class="input" *ngIf="newButton" type="text" name="address" [(ngModel)]="newUniv.location.address"></td>
+                <td> <input class="input" *ngIf="newButton" type="text" name="city" [(ngModel)]="newUniv.location.city"></td>
+                <td> <input class="input" *ngIf="newButton" type="text" name="district" [(ngModel)]="newUniv.location.district"></td>
+                <td> <input class="input" *ngIf="newButton" type="text" name="state" [(ngModel)]="newUniv.location.state"></td>
+                <td><button class="btn btn-success btn-sm" *ngIf="newButton" (click)="saveNew()"><i class="fa fa-save"> </i> Save</button>
+                  <button class="btn btn-secondary btn-sm" style="margin-left: 20px;" *ngIf="newButton" (click)="onCancel(newUniv)"><i class="fa fa-close"> </i> Cancel</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</form>
+<router-outlet></router-outlet>

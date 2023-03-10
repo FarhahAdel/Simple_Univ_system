@@ -1,0 +1,43 @@
+<div class="disp">
+    <div class="card border rounded border--light text-black m">
+      <div class="card-header" style="opacity: 0.7;">
+        <strong><i class="fa fa-list"></i> {{title}} {{currentUnivCourse.course_name | titlecase}} course</strong>
+      </div>
+      <div class="card-body table-responsive">
+        <div id="table-desktop" style="padding-left: 30px;">
+          <table class="table table-bordered rounded table-condensed table-hover table-striped table-dark">
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Student Date of birth</th>
+                <th>Student Enrollment day</th>
+                <th>Student situatoin</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let en of enrollment">
+                <tr>
+                  <td>
+                    {{en.student_name}}
+                  </td>
+                  <td>{{en.student_dob | date}}</td>
+                  <td>{{en.enrolment_date | date:'short'}}</td>
+                  <td>{{en.student_situation}}</td>
+                  <td>
+                    <div>
+                    <button class="btn btn-danger btn-sm" (click)="removeStudent(en)"><i class="fa fa-trash-o"> </i> Remove</button>
+                  </div>
+               
+                  </td>
+                </tr>
+              </ng-container>
+              <tr style="text-align:center;" *ngIf="enrollment && enrollment.length == 0">
+                <td colspan="6">{{NoStudents}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+      <router-outlet></router-outlet>

@@ -1,0 +1,61 @@
+<form class="form-horizontal" #login="ngForm">
+	<div class="login-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-8 m-auto col-sm-8 col-12">
+					<div class="log-box">
+						<div class="row">
+							<div class="col-xl-5 col-sm-5 col-12 pad-right-0">
+								<div class="logo-back">
+								</div>
+							</div>
+							<div class="col-xl-7 col-sm-7 col-12 pad-left-0">
+								<div class="log-content">
+									<h1>Login </h1>
+									<div class="log-body">
+										<div class="form-group myr-top">
+											<label>Username</label>
+											<input type="text" id="username" class="form-control custom"
+												placeholder="Username" [(ngModel)]="student.userName" name="username"
+												#username="ngModel">
+											<p class="text-danger"
+												*ngIf="username.errors?.required && username.touched">
+												Username is required.
+											</p>
+											
+										</div>
+										<div class="form-group myr-top">
+											<label>Password</label>
+											<input [type]="fieldTextType ? 'text' : 'password'" id="password" class="form-control custom"
+												placeholder="Password" [(ngModel)]="student.password" name="password"
+												#password="ngModel">
+												
+											<p class="text-danger"
+												*ngIf="password.errors?.required && password.touched">
+												Password is required.
+											</p>
+										</div>
+
+										<div class="log-btn text-center mt-5">
+											<button type="button" class="btn btn-theme1" [disabled]="!login.form.valid" (click)="loginFunc()" style="margin-right: 10px;"
+												>Login</button>
+											<button type="reset" class="btn btn-theme1 btn-info "
+												style="background-color: green;">Reset</button>
+										</div>
+										<div class="log-bottom-cotent">
+											<p class="mr-5">Don't have an account? <a class="pr-4" href="signup">Signup
+												</a>
+											</p>
+										</div>
+										<div *ngIf="flag" class='alert alert-danger'>Incorrect username or password</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<router-outlet></router-outlet>

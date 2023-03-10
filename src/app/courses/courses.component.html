@@ -1,0 +1,80 @@
+<div class="disp">
+  <div class="card border rounded border--light text-black m">
+    <div class="card-header" style="opacity: 0.7;">
+      <strong><i class="fa fa-list"></i> {{title}}</strong>
+    </div>
+    <div class="card-body table-responsive">
+      <div style="padding-left: 44%; padding-bottom: 20px;" class="dropdown">
+        <a class="btn btn-secondary btn-sm btn-outline-light" *ngIf="isAdmin && !newButton" type="button"
+          (click)="addNew()" style="align-self: center;"><i class="fa fa-pencil-square-o"></i> Add new</a>&nbsp;
+
+      </div>
+      <div id="table-desktop" style="padding-left: 30px;">
+        <table class="table table-bordered rounded table-condensed table-hover table-striped table-dark">
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Course acronym</th>
+              <th>Course area</th>
+              <th *ngIf="isAdmin">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let course of courses">
+              <tr>
+                <td>
+                  <div *ngIf="course.edit">
+                    <input class="input" type="text" name="name" [(ngModel)]="course.name">
+                  </div>
+                  <div *ngIf="!course.edit">
+                    {{course.name}}
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="course.edit">
+                    <input class="input" type="text" name="acronym" [(ngModel)]="course.acronym">
+                  </div>
+                  <div *ngIf="!course.edit">
+                    {{course.acronym}}
+                  </div>
+                </td>
+                <td>
+                  <div *ngIf="course.edit">
+                    <input class="input" type="text" name="area" [(ngModel)]="course.area">
+                  </div>
+                  <div *ngIf="!course.edit">
+                    {{course.area}}
+                  </div>
+                </td>
+                <td *ngIf="isAdmin">
+                  <div *ngIf="isAdmin">
+                    <a class="btn btn-warning btn-sm" *ngIf="!inEditFlag" (click)="onEdit(course)"><i
+                        class="fa fa-pencil-square-o"></i> Edit</a>&nbsp;
+                    <button class="btn btn-danger btn-sm" *ngIf="!inEditFlag" (click)="delete(course)"><i
+                        class="fa fa-trash-o"> </i> Delete</button>
+                    <button class="btn btn-success btn-sm" style="margin-left: 5px; margin-top: 3px;" *ngIf="course.edit"
+                      (click)="onSave(course)"><i class="fa fa-save"> </i> save</button>
+                    <button class="btn btn-secondary btn-sm" style="margin-left: 5px; margin-top: 3px;"
+                      *ngIf="course.edit" (click)="onCancel(course)"><i class="fa fa-remove"> </i> cancel</button>
+                  </div>
+
+                </td>
+              </tr>
+            </ng-container>
+            <tr style="text-align:center;" *ngIf="courses && courses.length == 0">
+              <td colspan="6">{{NoCourses}}</td>
+            </tr>
+            <tr *ngIf="newButton">
+              <td> <input class="input" *ngIf="newButton" type="text" name="name" [(ngModel)]="newCourse.name"></td>
+              <td> <input class="input" *ngIf="newButton" type="text" name="acronym" [(ngModel)]="newCourse.acronym"></td>
+              <td> <input class="input" *ngIf="newButton" type="text" name="area" [(ngModel)]="newCourse.area"></td>
+              <td><button class="btn btn-success btn-sm" *ngIf="newButton" (click)="onSave(newCourse)"><i class="fa fa-save"> </i> Save</button>
+              <button class="btn btn-secondary btn-sm" style="margin-left: 20px;" *ngIf="newButton" (click)="onCancel(newCourse)"><i class="fa fa-remove"> </i> Cancel</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+  </div>
+  <router-outlet></router-outlet>

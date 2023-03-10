@@ -1,0 +1,26 @@
+.m{
+    margin-top: 50px;
+    width: 800px;
+    
+}
+.table{
+    width: 900px;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    ;
+
+}
+.disp{
+    padding-left: 20%;
+    /* font-family:Poppins-R; */
+	font-size:14px;
+}
+
+.label{
+   padding-left: 100px;
+    font-weight: bold;
+}
+.row{
+    padding-bottom: 30px;
+}
